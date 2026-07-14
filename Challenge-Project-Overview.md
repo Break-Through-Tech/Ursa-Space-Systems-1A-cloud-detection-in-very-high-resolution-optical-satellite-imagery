@@ -18,127 +18,117 @@
 
 ---
 
-### 🔍 SME Feedback from the Break Through Tech Evaluation Team
+## 📋 BTT Internal Evaluation Notes
+*(This section is for BTT staff and CAs only — remove before sharing with students)*
 
-*Challenge Advisor: Please address the following feedback by editing this page. Your AI Studio Coach can help make project adjustments as needed, too. In addition to the grey section above, this section should be removed before sharing the repo with your student team.*
+### Technical Vetting
+| Check | Status | Notes |
+| :--- | :--- | :--- |
+| Python Compatibility | 🟢 | The project explicitly mentions 'Geospatial Python' libraries (rasterio, leafmap) and 'computer-vision segmentation models', which are well-supported within the Python ecosystem. Google Colab provides a Python environment conducive to these libraries. |
+| Data Readiness | 🟡 | While the data is described as 'cloud-optimized GeoTIFFs,' very high-resolution satellite imagery often requires substantial preprocessing. Tasks like mosaicking, resampling, projection handling, and potentially atmospheric correction could be time-consuming. The size estimate also indicates potential challenges in download and processing. |
+| Resource Check | 🟢 | The project explicitly states 'Google Colab free tier' and no specialized hardware. The specified models (SAM, compact U-Net) are generally accessible and runnable within this environment, though performance may vary. |
+
+### Internal Scores
+- **Student Fit Score:** 7/10
+- **Technical Depth Score:** 8/10
+- **Overall Recommendation:** REVISE
+
+### Advisor Feedback Draft
+This project presents a compelling opportunity to apply classical signal processing and modern CV models to a real-world problem in satellite imagery. 
+
+Technical Adjustments:
+1. Data Ingestion & Preprocessing Focus: To mitigate potential data volume issues, consider providing fellows with pre-selected, smaller subsets of VHR imagery (e.g., 5-10 representative scenes) that are already organized and tiled. This shifts the focus from data wrangling to model benchmarking. 
+2. Model Scope Refinement: Explicitly define the 'off-the-shelf' pretrained models to be used. For instance, specify one or two well-documented segmentation models (e.g., a standard U-Net implementation, or a lightweight SAM variant) to prevent fellows from spending excessive time on model selection or environment setup.
+
+Call to Action: We recommend proceeding with this project, contingent on refining the data access strategy and clearly scoping the specific pretrained models to ensure feasibility within the 12-week timeframe.
 
 ---
 
-# [Project Title]
+# Cloud Detection in Very-High-Resolution Optical Satellite Imagery: Classical Signal Processing vs. Pretrained Deep Learning Models
 
-**Company / Org:** [Company / Org Name]  
-**Challenge Advisor:** [Name, Title, Email]  
-**Program:** Break Through Tech AI Studio - Fall 2026
+**Company / Org:** Ursa Space Systems  
+**Challenge Advisor:** Nicholas LaVigne, nicholas.lavigne@ursaspace.com  
+**Program:** Break Through Tech AI Studio - Fall 2026  
 
 ---
 
-## 🏢 About [Company / Org Name]
-
-[2-3 sentences about your company: what you do, your industry, etc. You may also choose to specify your specific department or team.]
+## 🏢 About Ursa Space Systems
+Ursa Space Systems is a global leader in satellite intelligence, leveraging a virtual constellation of SAR and optical sensors to provide high-fidelity insights for commercial and government sectors. The company specializes in transforming massive volumes of geospatial data into actionable intelligence, helping clients monitor economic activity and environmental changes worldwide.
 
 ---
 
 ## 🎯 The Challenge
-
 ### Project Summary
-[In 2-3 sentences, describe what you're asking the team to do. Be specific about the type of data, ML techniques, and potential impact.]
-
-> **Example:** "In this project, your team will use customer transaction data and classification algorithms to build a model that predicts which users are likely to churn. This will help our retention team prioritize outreach."
+This challenge focuses on developing robust cloud-detection masks for very-high-resolution (VHR) satellite imagery to minimize data degradation in downstream analytics. Students will compare classical signal-processing techniques against modern computer-vision segmentation models to identify and mask cloud-covered pixels. This work is critical to improving the quality of satellite imagery products provided by Ursa Space Systems to its global customer base.
 
 ### Success Criteria
-[What does success look like? Describe evaluation metrics (accuracy, F1 score, etc.) or qualitative outcomes that would make this project valuable to your company.]
+Clear, reproducible comparison using standard segmentation metrics — Intersection-over-Union (IoU), precision/recall, F1 — on cloud vs. non-cloud pixels; a documented qualitative error analysis of where each method breaks; a clean notebook and writeup that identifies which approaches work best on VHR RGB imagery.
 
 ### Project Milestones
-
-Use these milestones to guide your work. Your team will create a **GitHub Projects board** to track tasks within each milestone.
-
+Use these milestones to guide your work. Your team will create a GitHub Projects board to track tasks within each milestone.
 | Month | Milestone | Key Activities |
 |-------|-----------|----------------|
-| **September** | [e.g., Data Understanding] | [e.g., Explore dataset, handle missing values, document findings] |
-| **October** | [e.g., Model Development] | [e.g., Train baseline model, experiment with approaches, iterate] |
-| **November** | [e.g., Evaluation & Presentation] | [e.g., Finalize model, prepare presentation, document results] |
+| **September** | Data Exploration & Preprocessing | Load and tile VHR imagery into manageable chunks, while performing initial visualization and descriptive statistics of cloud vs. non-cloud surface signatures. |
+| **October** | Feature Engineering & Baseline Modeling | Implement classical signal-processing thresholds (e.g., brightness, haze indices) and establish initial performance baselines for the segmentation models. |
+| **November** | Model Optimization & Evaluation | Refine model hyperparameters, execute comparative benchmarking runs across test scenes, and validate segmentation accuracy against ground-truth assumptions. |
+| **December** | Insights, Deliverables & Presentation | Synthesize results into a technical report, package the final cloud-masking codebase, and prepare a presentation summarizing findings for stakeholders. |
 
 > **Note for the team:** Please create a GitHub Projects board in this repository to break these milestones into weekly tasks. Go to the **Projects** tab → **New project** → Choose **Board** → Add columns for each month.
 
 ---
 
 ## 📊 Dataset
-
-**Name and Source:** [Dataset name and where it's from]  
-**Format:** [e.g., CSV, JSON, images]  
-**Size:** [Approximate size in MB/GB]  
-**Location:** [Link to dataset or instructions for accessing it]
+**Name and Source:** Maxar Open Data Program / Vantor  
+**Format:** Cloud-optimized GeoTIFFs  
+**Size:** over 10gb  
+**Location:** Accessible via Maxar Open Data Program portal or provided cloud buckets.  
 
 ### Key Details
-- [Brief description of what's in the data]
-- [Any known limitations or preprocessing needed]
-- [Link to data dictionary or documentation, if available]
+- Very-high-resolution (~30–50cm) optical satellite imagery (cloud-optimized GeoTIFFs) from the Maxar Open Data Program.
+- Teams must implement preprocessing routines for handling coordinate reference systems (CRS) and normalizing image tiling to ensure model compatibility.
 
 ---
 
 ## 🛠️ Suggested Approach
-
-**ML Problem Type:** [e.g., Classification, Regression, NLP, Computer Vision, LLM/RAG]
-
+**ML Problem Type:** Computer Vision / Image Segmentation  
 **Recommended Libraries:**
-- [e.g., pandas, scikit-learn, TensorFlow, Hugging Face]
-
-**Evaluation Metrics:**
-- [e.g., Accuracy, Precision/Recall, RMSE, BLEU score]
+- Geospatial Python (rasterio, leafmap)
+- Google Colab
+- Computer-vision segmentation models (e.g., SAM, compact U-Net)
+**Evaluation Metrics:** Intersection-over-Union (IoU), Precision, Recall, and F1-Score for binary mask accuracy.
 
 ---
 
 ## 📚 Resources to Get Started
-
 The following resources will help your team understand the problem space and potential technical approaches for this project:
-
 **Background Reading:**
-- [e.g., Link to an article or blog post about the problem domain]
-- [e.g., Link to an industry report or case study]
-
+- [Maxar Open Data Program Documentation](https://www.maxar.com/open-data)
 **Technical Tutorials:**
-- [e.g., Link to a free tutorial on the ML technique(s) involved]
-- [e.g., Link to documentation for a key library or tool]
-
+- [Rasterio Documentation for Geospatial Image Processing](https://rasterio.readthedocs.io/)
 **Code Examples:**
-- [e.g., Link to a relevant GitHub repo]
-- [e.g., Link to a sample implementation or starter code]
-
-**Other:**
-- [Links to any additional resources — e.g., papers, videos, podcasts, etc.]
-
-*Feel free to explore beyond these, and share anything interesting you find with me!*
+- [Segment Anything Model (SAM) GitHub Repository](https://github.com/facebookresearch/segment-anything)
 
 ---
 
-## 🤝 How We'll Work Together (v2)
-
-**Official check-ins:** During our biweekly 45-minute AI Studio Lab Section meeting block (2nd and 4th week of every month)
-
- **Other ways to reach out to me with questions:** 
-* [e.g., Your team's channel within Break Through Tech’s Discord space]
-* [e.g., Email; please copy your teammates and AI Studio Coach]
-* [e.g., Request a team check-in on Zoom]
-* [Note: I will aim to respond within 48 hours. Please reach out to your AI Studio Coach with urgent questions.]
-
-> 💡 **Challenge Advisor: Please update the above based on your availability and preference. If you are not able to answer questions or meet with fellows outside of the biweekly Lab Section check-ins, simply write in "N/A (only available during the official check-in times)"**
-
-**Recommended free coding / collaboration tools**
-* […]
-* […]
+## 🤝 How We'll Work Together
+**Check-ins:** During our biweekly 60-min AI Studio Lab Section meeting block (2nd and 4th week of every month)  
+**Communication:** Via Slack and GitHub Discussions.  
+**Response time:** 24–48 hours for non-urgent inquiries.  
+**Recommended Tools:**
+- **Coding:** Google Colab Free Tier  
+- **Collaboration:** GitHub, Notion  
+- **Virtual Meetings:** Zoom, Google Meet  
 
 ---
 
 ## 🚀 Getting Started
+1. **Review this overview document** and note any questions for our first meeting.
+2. **Begin reviewing the dataset** using the link provided in the Dataset section.
+3. **Read the GitHub Projects documentation** [here](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects).
 
-1. **Review this overview document** and note any questions for our first meeting
-2. **Begin reviewing the dataset** using the link above
-3. **Read the GitHub Projects documentation** [here](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
-
-I’m excited to work with you!
+I'm excited to work with you!
 
 ---
 
 ## ❓ Questions?
-
-Please bring any questions to our first meeting during the week of August 24th (Break Through Tech’s Bridge to Studio - Session C). 
+Please bring any questions to our first meeting during the week of August 24th (Break Through Tech's Bridge to Studio - Session B).
