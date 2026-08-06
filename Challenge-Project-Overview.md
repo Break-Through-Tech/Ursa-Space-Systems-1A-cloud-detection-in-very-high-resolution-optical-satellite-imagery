@@ -73,6 +73,12 @@ Use these milestones to guide your work. Your team will create a GitHub Projects
 | **November** | Model Optimization & Evaluation | Refine model hyperparameters, execute comparative benchmarking runs across test scenes, and validate segmentation accuracy against ground-truth assumptions. |
 | **December** | Insights, Deliverables & Presentation | Synthesize results into a technical report, package the final cloud-masking codebase, and prepare a presentation summarizing findings for stakeholders. |
 
+| Month | Milestone | Key Activities |
+| :--- | :--- | :--- |
+| September | Foundations & Data Setup | • Set up environment in Colab using geospatial Python libraries (`rasterio`, `leafmap`).<br>• Stream and window-read cloud-optimized GeoTIFFs (COGs) from the Maxar Open Data catalog.<br>• Assemble a working dataset of VHR scenes filtered for higher cloud cover.<br>• Characterize visual features of clouds, smoke, and cloud-like surfaces (snow, bright rooftops, sand). |
+| October | Classical Baseline Development | • Implement signal-processing baselines in the RGB/visible domain (brightness/saturation thresholding, dark-channel prior, HOT-style index).<br>• Construct a hand-labeled/visually-assessed evaluation set for quantitative comparison.<br>• Build a working classical cloud-mask pipeline and evaluate qualitative/quantitative performance. |
+| November | Pretrained Models & Benchmark Comparison | • Apply pretrained segmentation models (e.g., zero-shot Segment Anything Model / SAM, RGB cloud-segmentation checkpoints).<br>• Conduct head-to-head benchmarking against classical baselines using standard segmentation metrics (IoU, Precision, Recall, F1-score).<br>• Perform qualitative error analysis on failure modes (smoke vs. cloud, bright non-cloud surfaces).<br>• Finalize benchmark notebook, results writeup, and final presentation deck. |
+
 > **Note for the team:** Please create a GitHub Projects board in this repository to break these milestones into weekly tasks. Go to the **Projects** tab → **New project** → Choose **Board** → Add columns for each month.
 
 ---
