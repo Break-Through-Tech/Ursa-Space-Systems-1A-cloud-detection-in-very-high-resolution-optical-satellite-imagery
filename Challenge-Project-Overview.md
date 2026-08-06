@@ -66,12 +66,6 @@ Clear, reproducible comparison using standard segmentation metrics — Intersect
 
 ### Project Milestones
 Use these milestones to guide your work. Your team will create a GitHub Projects board to track tasks within each milestone.
-| Month | Milestone | Key Activities |
-|-------|-----------|----------------|
-| **September** | Data Exploration & Preprocessing | Load and tile VHR imagery into manageable chunks, while performing initial visualization and descriptive statistics of cloud vs. non-cloud surface signatures. |
-| **October** | Feature Engineering & Baseline Modeling | Implement classical signal-processing thresholds (e.g., brightness, haze indices) and establish initial performance baselines for the segmentation models. |
-| **November** | Model Optimization & Evaluation | Refine model hyperparameters, execute comparative benchmarking runs across test scenes, and validate segmentation accuracy against ground-truth assumptions. |
-| **December** | Insights, Deliverables & Presentation | Synthesize results into a technical report, package the final cloud-masking codebase, and prepare a presentation summarizing findings for stakeholders. |
 
 | Month | Milestone | Key Activities |
 | :--- | :--- | :--- |
